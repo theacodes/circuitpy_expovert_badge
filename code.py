@@ -106,19 +106,18 @@ while True:
             if button.contains(touch):
                 if button.name == "back":
                     print("1: back_button.hidden", back_button_group.hidden)
-                    pyportal.set_background(background_color)
                     back_button_group.hidden = True
                     button_group.hidden = False
+                    pyportal.set_background(background_color)
                     print("2: back_button.hidden", back_button_group.hidden)
                 if button.name == "green":
                     print("Let's display our full battery image.")
                     print("is button group hidden?", button_group.hidden)
                     # pyportal.splash.pop(1)
                     button_group.hidden = True
+                    back_button_group.hidden = False
                     print("is button group hidden?", button_group.hidden)
                     pyportal.set_background("images/full.bmp")
-                    back_button_group.hidden = False
-
 
                 print("Touched", button.name)
                 current_color = button.fill_color
