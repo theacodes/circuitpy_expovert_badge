@@ -81,14 +81,15 @@ for button in buttons:
 pyportal.splash.append(button_group)
 
 back_button = Button(
-            x=250, y=200,
-            width=60, height=40,
+            x=10, y=200,
+            width=80, height=40,
             style=Button.SHADOWROUNDRECT,
-            fill_color=(165, 172, 184),
+            fill_color=(0, 0, 0),
             outline_color=0x222222,
             name="back",
             label="back",
             label_font=arial_font,
+            label_color=0xFFFFFF,
             )
 buttons.append(back_button)
 back_button_group = displayio.Group()
@@ -98,6 +99,12 @@ back_button_group.hidden = True
 
 current_color = 0
 current_offset = 0
+
+status_backgrounds = {
+    "green": "images/full.bmp",
+    "yellow": "images/low.bmp",
+    "red": "images/empty.bmp",
+}
 
 while True:
     touch = pyportal.touchscreen.touch_point
@@ -110,14 +117,10 @@ while True:
                     button_group.hidden = False
                     pyportal.set_background(background_color)
                     print("2: back_button.hidden", back_button_group.hidden)
-                if button.name == "green":
-                    print("Let's display our full battery image.")
-                    print("is button group hidden?", button_group.hidden)
-                    # pyportal.splash.pop(1)
+                if button.name in status_backgrounds:
                     button_group.hidden = True
                     back_button_group.hidden = False
-                    print("is button group hidden?", button_group.hidden)
-                    pyportal.set_background("images/full.bmp")
+                    pyportal.set_background(status_backgrounds[button.name])
 
                 print("Touched", button.name)
                 current_color = button.fill_color
